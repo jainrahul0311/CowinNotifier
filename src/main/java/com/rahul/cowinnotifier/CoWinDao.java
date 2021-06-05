@@ -101,9 +101,11 @@ public class CoWinDao {
             if (statusCodeValue == 200) {
                 return new JSONObject(exchange.getBody());
             } else {
+                logger.error("Response on Error " + exchange.getBody());
                 return new JSONObject().put("error", "Response Code from CoWin API is " + statusCodeValue);
             }
         }catch (HttpStatusCodeException exception){
+            logger.error("Response on Error " + exception.getResponseBodyAsString());
             return new JSONObject().put("error", "Response Code from CoWin API is " + exception.getStatusCode());
         }
     }
